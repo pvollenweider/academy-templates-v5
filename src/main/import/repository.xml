@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
+   <modules jcr:primaryType="jnt:modules">
+      <jahia-academy-template j:dependencies="bootstrap5-components jquery default"
+                              j:installedModules="jahia-academy-template"
+                              j:modulePriority="10"
+                              j:moduleType="templatesSet"
+                              j:title="New academy templates"
+                              jcr:primaryType="jnt:module">
+         <portlets jcr:primaryType="jnt:portletFolder"/>
+         <files jcr:primaryType="jnt:folder"/>
+         <contents jcr:primaryType="jnt:contentFolder"/>
+         <templates jcr:primaryType="jnt:templatesFolder">
+            <files jcr:primaryType="jnt:folder">
+               <themes jcr:primaryType="jnt:folder">
+                  <default jcr:primaryType="jnt:folder"/>
+               </themes>
+            </files>
+            <contents jcr:primaryType="jnt:contentFolder"/>
+            <base j:theme="#/modules/jahia-academy-template/templates/files/themes/default"
+                  j:view="jahia-academy-template"
+                  jcr:mixinTypes="jmix:theme"
+                  jcr:primaryType="jnt:template">
+               <free jcr:primaryType="jnt:pageTemplate"/>
+               <documentationFullWidth jcr:primaryType="jnt:pageTemplate"/>
+               <product-home jcr:primaryType="jnt:pageTemplate"/>
+            </base>
+            <base2 j:theme="#/modules/jahia-academy-template/templates/files/themes/default"
+                  j:view="jahia-academy-document-template"
+                  jcr:mixinTypes="jmix:theme"
+                  jcr:primaryType="jnt:template">
+               <documentation jcr:primaryType="jnt:pageTemplate"/>
+            </base2>
+            <content-template j:applyOn="jnt:content"
+                              j:hiddenTemplate="true"
+                              j:priority="1"
+                              j:view="jahia-academy-template"
+                              jcr:primaryType="jnt:contentTemplate">
+               <pagecontent jcr:primaryType="jnt:contentList">
+                  <main-resource-display j:mainResourceView="default" jcr:primaryType="jnt:mainResourceDisplay"/>
+               </pagecontent>
+            </content-template>
+         </templates>
+         <home j:isHomePage="true"
+               j:templateName="free"
+               jcr:primaryType="jnt:page">
+            <j:translation_en jcr:language="en"
+                              jcr:mixinTypes="mix:title"
+                              jcr:primaryType="jnt:translation"
+                              jcr:title="Home"/>
+         </home>
+      </jahia-academy-template>
+   </modules>
+</content>
