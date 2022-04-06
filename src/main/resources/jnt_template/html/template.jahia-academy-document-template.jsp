@@ -66,11 +66,12 @@
     </div>
 </header>
 
+<%-- TODO: jacademix:hideBreadcrumb --%>
+<c:if test="${!jcr:isNodeType(mainResourceNode, 'jacademix:hideBreadcrumb')}">
+    <template:include view="hidden.breadcrumb"/>
+</c:if>
+
 <main>
-
-    <%-- TODO: jacademix:hideBreadcrumb --%>
-
-
         <div class="container-fluid">
             <div class="row">
                 <div class="d-none d-lg-block col-2 p-0">
@@ -135,7 +136,6 @@
                 </div>
                 <div class="col-2 d-none d-xl-block">
                     <!--empty-->
-
                 </div>
 
             </div>

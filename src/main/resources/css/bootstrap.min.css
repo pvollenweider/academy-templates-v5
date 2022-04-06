@@ -11398,8 +11398,17 @@ td.hljs-ln-code {
   background-color: transparent;
 }
 
-.nav-item.active a {
+.nav-item > a,
+.dropdown-item > a {
+  color: rgba(0, 0, 0, 0.85);
+}
+.nav-item.active > a,
+.dropdown-item.active > a {
   color: #209fda;
+}
+
+.dropdown-item.active > a {
+  color: #fff;
 }
 
 .simplebox {
