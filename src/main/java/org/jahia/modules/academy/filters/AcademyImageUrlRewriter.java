@@ -88,7 +88,7 @@ public class AcademyImageUrlRewriter extends AbstractFilter {
                     newImgTag.append("           class=\"figure-img img-fluid rounded shadow\"");
                     newImgTag.append("         />");
                     newImgTag.append("    </a>");
-                    newImgTag.append("</div>");
+                    newImgTag.append("</figure>");
                     logger.debug("New IMG tag : " + newImgTag.toString());
                     out.replace(imgTag, newImgTag.toString());
                 }
