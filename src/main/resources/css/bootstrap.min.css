@@ -11168,7 +11168,7 @@ aside .bd-links ul {
   padding-left: 0;
   list-style: none;
 }
-aside .bd-links ul ul {
+aside .bd-links ul ul ul {
   padding-left: 1rem;
 }
 @media (max-width: 767.98px) {
@@ -11189,6 +11189,7 @@ aside .bd-links a, aside .bd-links .btn {
   color: rgba(0, 0, 0, 0.65);
   background-color: transparent;
   text-decoration: none;
+  text-align: start;
 }
 aside .bd-links a:hover, aside .bd-links a:focus, aside .bd-links .btn:hover, aside .bd-links .btn:focus {
   color: rgba(0, 0, 0, 0.85);
@@ -11201,6 +11202,7 @@ aside .bd-links a {
 }
 aside .bd-links .btn {
   padding: 0.25rem 0.5rem;
+  margin-left: -0.15rem;
   border: 0;
 }
 aside .bd-links .btn:focus {

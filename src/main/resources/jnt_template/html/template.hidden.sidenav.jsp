@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="jcr" uri="http://www.jahia.org/tags/jcr" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="template" uri="http://www.jahia.org/tags/templateLib" %>
 
 <%--@elvariable id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"--%>
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
@@ -9,7 +10,10 @@
 
 <aside class="sticky-top bg-light d-none d-sm-block vh-100">
     <nav class="collapse bd-links pt-4 sticky-top " id="bd-docs-nav" aria-label="Docs navigation">
-        <ul class="mb-0 py-2 pt-md-1">
+        <template:include view="hidden.sidenav2"/>
+
+
+        <%--<ul class="mb-0 py-2 pt-md-1">
             <li>
                 <a class="d-inline-flex align-items-center rounded" href="#">
                     Getting started
@@ -20,15 +24,13 @@
                            data-bs-target="#customize-collapse" aria-expanded="false">
                             Customize
                         </a>
-
-
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#layout-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             Layout
-                        </button>
+                        </a>
 
                         <div class="collapse" id="layout-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -56,11 +58,11 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded"
+                        <a class="btn d-inline-flex align-items-center rounded"
                                 data-bs-toggle="collapse" data-bs-target="#content-collapse"
-                                aria-expanded="true" aria-current="true">
+                                aria-expanded="true" aria-current="true" href="#">
                             Content
-                        </button>
+                        </a>
 
                         <div class="collapse show" id="content-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -80,11 +82,11 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="btn d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#forms-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             Forms
-                        </button>
+                        </a>
 
                         <div class="collapse" id="forms-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -124,11 +126,11 @@
                 </a>
                 <ul>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="btn d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#components-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             Components
-                        </button>
+                        </a>
 
                         <div class="collapse" id="components-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -202,11 +204,11 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="btn d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#helpers-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             Helpers
-                        </button>
+                        </a>
 
                         <div class="collapse" id="helpers-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -244,11 +246,11 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="btn d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#utilities-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             Utilities
-                        </button>
+                        </a>
 
                         <div class="collapse" id="utilities-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -297,11 +299,11 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="btn d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#extend-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             Extend
-                        </button>
+                        </a>
 
                         <div class="collapse" id="extend-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -314,11 +316,11 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn d-inline-flex align-items-center rounded collapsed"
+                        <a class="btn d-inline-flex align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#about-collapse"
-                                aria-expanded="false">
+                                aria-expanded="false" href="#">
                             About
-                        </button>
+                        </a>
 
                         <div class="collapse" id="about-collapse">
                             <ul class="fw-normal pb-1 small">
@@ -341,6 +343,7 @@
             </li>
 
         </ul>
+        --%>
     </nav>
 
 </aside>
