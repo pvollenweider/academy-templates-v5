@@ -25,6 +25,7 @@
     <!-- Bootstrap CSS -->
     <template:addResources type="css" resources="bootstrap.min.css"/>
     <template:addResources type="css" resources="all.min.css"/>
+    <template:addResources type="css" resources="multilevel.css"/>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
@@ -153,10 +154,14 @@
 <template:addResources type="javascript" resources="toc.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="index.bundle.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="readingTime.js" targetTag="${renderContext.editMode?'head':'body'}"/>
+<template:addResources type="javascript" resources="multilevel-nav.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 
 <template:addResources type="inline" targetTag="body">
-<script>
+    <script>
         $('article').readingTime();
+
+
+
     </script>
 </template:addResources>
 

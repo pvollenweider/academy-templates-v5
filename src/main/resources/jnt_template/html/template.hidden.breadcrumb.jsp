@@ -54,15 +54,7 @@
                                     --%>
                                     <li class="breadcrumb-item dropdown">
                                         <template:addCacheDependency node="${pageNode}"/>
-                                        <c:choose>
-                                            <c:when test="${jcr:findDisplayableNode(pageNode, renderContext) ne pageNode}">
-                                                <c:set var="pageUrl" value="#"/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:url var="pageUrl" value='${pageNode.url}' context='/'/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <a href="${pageUrl}" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="breadcrumb_${pageNode.identifier}">
+                                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="breadcrumb_${pageNode.identifier}">
                                                 ${pageNode.displayableName}
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="breadcrumb_${pageNode.identifier}">
@@ -80,10 +72,10 @@
                                                                    value="${fn:length(subsisterPages) > 0}"/>
                                                             <c:choose>
                                                                 <c:when test="${hassubSisterPages}">
-                                                                    <li class="dropdown-item dropdown-submenu ${active}">
-                                                                        <a href="#" class="sub-menu-trigger"
-                                                                           role="button">${sisterPage.displayableName}</a>
-                                                                        <ul class="dropdown-menu">
+                                                                    <li class="dropdown-item dropdown ${active} dropend">
+                                                                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"
+                                                                           role="button" id="breadcrumb_${sisterPage.identifier}">${sisterPage.displayableName}</a>
+                                                                        <ul class="submenu dropdown-menu"  aria-labelledby="breadcrumb_${sisterPage.identifier}">
                                                                             <c:forEach items="${subsisterPages}"
                                                                                        var="subsisterPage"
                                                                                        varStatus="status">

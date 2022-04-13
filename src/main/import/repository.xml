@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
    <modules jcr:primaryType="jnt:modules">
-      <jahia-academy-template j:dependencies="bootstrap5-components jquery default"
+      <jahia-academy-template j:dependencies="bootstrap5-components default font-awesome jquery"
                               j:installedModules="jahia-academy-template"
                               j:modulePriority="10"
                               j:moduleType="templatesSet"
@@ -23,12 +23,65 @@
                   jcr:primaryType="jnt:template">
                <free jcr:primaryType="jnt:pageTemplate"/>
                <documentationFullWidth jcr:primaryType="jnt:pageTemplate"/>
-               <product-home jcr:primaryType="jnt:pageTemplate"/>
+               <product-home jcr:primaryType="jnt:pageTemplate">
+                  <pagecontent jcr:mixinTypes="jmix:systemNameReadonly"
+                               jcr:primaryType="jnt:contentList">
+                     <header containerType="container"
+                             grid="8_4"
+                             horizontalGutters="default"
+                             jcr:mixinTypes="bootstrap5mix:createContainer bootstrap5mix:createRow bootstrap5mix:createSection bootstrap5mix:predefinedGrid"
+                             jcr:primaryType="bootstrap5nt:grid"
+                             rowHorizontalAlignment="default"
+                             rowVerticalAlignment="default"
+                             sectionCssClass="bluebg"
+                             sectionElement="div"
+                             typeOfGrid="predefinedGrid"
+                             verticalGutters="default">
+                        <layout-and-grid-main jcr:mixinTypes="jmix:systemNameReadonly"
+                                              jcr:primaryType="jnt:contentList">
+                           <main jcr:primaryType="jnt:area"/>
+                        </layout-and-grid-main>
+                        <layout-and-grid-side jcr:mixinTypes="jmix:systemNameReadonly"
+                                              jcr:primaryType="jnt:contentList">
+                           <side jcr:primaryType="jnt:area"/>
+                        </layout-and-grid-side>
+                        <header-main jcr:mixinTypes="jmix:systemNameReadonly"
+                                     jcr:primaryType="jnt:contentList">
+                           <main jcr:primaryType="jnt:area"/>
+                        </header-main>
+                        <header-side jcr:mixinTypes="jmix:systemNameReadonly"
+                                     jcr:primaryType="jnt:contentList">
+                           <side jcr:primaryType="jnt:area"/>
+                        </header-side>
+                     </header>
+                     <product-topics containerCssClass="my-4"
+                                     containerType="container"
+                                     grid="12"
+                                     horizontalGutters="default"
+                                     jcr:mixinTypes="bootstrap5mix:createContainer bootstrap5mix:createRow bootstrap5mix:predefinedGrid"
+                                     jcr:primaryType="bootstrap5nt:grid"
+                                     rowHorizontalAlignment="default"
+                                     rowVerticalAlignment="default"
+                                     typeOfGrid="predefinedGrid"
+                                     verticalGutters="default">
+                        <product-topics-main jcr:mixinTypes="jmix:systemNameReadonly"
+                                             jcr:primaryType="jnt:contentList">
+                           <navigation-menu j:baselineNode="currentPage"
+                                            j:maxDepth="10"
+                                            j:menuItemView="menuElement"
+                                            j:startLevel="0"
+                                            j:view="academy"
+                                            jcr:mixinTypes="jmix:renderable"
+                                            jcr:primaryType="jnt:navMenu"/>
+                        </product-topics-main>
+                     </product-topics>
+                  </pagecontent>
+               </product-home>
             </base>
             <base2 j:theme="#/modules/jahia-academy-template/templates/files/themes/default"
-                  j:view="jahia-academy-document-template"
-                  jcr:mixinTypes="jmix:theme"
-                  jcr:primaryType="jnt:template">
+                   j:view="jahia-academy-document-template"
+                   jcr:mixinTypes="jmix:theme"
+                   jcr:primaryType="jnt:template">
                <documentation jcr:primaryType="jnt:pageTemplate"/>
             </base2>
             <content-template j:applyOn="jnt:content"

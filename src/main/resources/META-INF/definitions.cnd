@@ -161,3 +161,8 @@
  - size (string, choicelist[resourceBundle]) = 'default' autocreated indexed=no < 'default', 'lg', 'sm'
  - displayOnlyOnce (boolean) = 'true'
  + * (jmix:droppableContent) = jmix:droppableContent
+
+
+[jacademy:textBox] > jnt:content, jacademix:component, mix:title, bootstrap5mix:text
+- hx (string, choicelist[resourceBundle,moduleImage='png']) = 'h2' autocreated indexed=no < 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+- secondaryTitle (string) i18n
