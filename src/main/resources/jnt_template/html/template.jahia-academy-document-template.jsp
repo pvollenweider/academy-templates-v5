@@ -75,10 +75,13 @@
 <main>
         <div class="container-fluid">
             <div class="row">
-                <div class="d-none d-lg-block col-2 p-0">
-                    <template:include view="hidden.sidenav"/>
-                </div>
-                <div class="col-md-12 col-lg-10 col-xl-8 ">
+                <template:include view="hidden.sidenav2" var="sidenav"/>
+                <c:if test="${! empty sidenav}">
+                    <div class="d-none d-lg-block col-2 p-0">
+                       ${sidenav}
+                    </div>
+                </c:if>
+                <div class="col-md-12 col-lg-${empty sidenav ? '12' : '10'} col-xl-${empty sidenav ? '10' : '8'} ">
                     <div class="container-lg ">
                         <div class="row gx-5">
                             <div class="col-12 col-sm-9 ">

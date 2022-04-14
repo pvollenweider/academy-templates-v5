@@ -66,6 +66,7 @@ printMenu = { startNode, level, maxlevel ->
                             print "<ul>";
                             printMenu(menuItem, level + 1, maxlevel);
                             print "</ul>";
+
                             print "</li>";
                         } else if (level == 2) {
                             print "<li>";
@@ -130,7 +131,7 @@ printMenu = { startNode, level, maxlevel ->
 
 long maxlevel = 5;
 
-JCRNodeWrapper startNode = renderContext.site.home;
+JCRNodeWrapper startNode = null;
 
 JCRNodeWrapper curentPageNode = renderContext.mainResource.node;
 List<JCRNodeWrapper> parentPages = JCRTagUtils.getParentsOfType(curentPageNode,"jmix:navMenuItem");
@@ -145,14 +146,20 @@ if (!parentPages.empty) {
         }
     }
 }
-
-
-
-// Add dependencies to parent of main resource so that we are aware of new pages at sibling level
-try {
-    currentResource.dependencies.add(renderContext.mainResource.node.getParent().getCanonicalPath());
-} catch (ItemNotFoundException e) {
+if (startNode != null) {
+    // Add dependencies to parent of main resource so that we are aware of new pages at sibling level
+    try {
+        currentResource.dependencies.add(renderContext.mainResource.node.getParent().getCanonicalPath());
+    } catch (ItemNotFoundException e) {
+    }
+    print "<aside class=\"sticky-top bg-light d-none d-sm-block vh-100\">\n" +
+            "    <nav class=\"collapse bd-links pt-4 sticky-top \" id=\"bd-docs-nav\" aria-label=\"Docs navigation\">";
+    print "<ul class=\"mb-0 py-2 pt-md-1\">";
+    printMenu(startNode, 1,  maxlevel)
+    print "</ul>"
+    print "</nav>";
+    print "</aside>";
 }
-print "<ul class=\"mb-0 py-2 pt-md-1\">";
-printMenu(startNode, 1,  maxlevel)
-print "</ul>"
+
+
+

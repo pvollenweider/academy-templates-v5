@@ -10,9 +10,6 @@
 
 <aside class="sticky-top bg-light d-none d-sm-block vh-100">
     <nav class="collapse bd-links pt-4 sticky-top " id="bd-docs-nav" aria-label="Docs navigation">
-        <template:include view="hidden.sidenav2"/>
-
-
         <%--<ul class="mb-0 py-2 pt-md-1">
             <li>
                 <a class="d-inline-flex align-items-center rounded" href="#">
