@@ -15,10 +15,10 @@
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <c:set var="heading" value="${currentNode.properties.heading.string}"/>
 <c:set var="expanded" value="${currentNode.properties.expanded.string}"/>
-<${heading}><a data-bs-toggle="collapse" href="#collapse${currentNode.identifier}" aria-controls="collapse${currentNode.identifier}" aria-expanded="${expanded}">${currentNode.displayableName}
-<i class="fas fa-fw fa-angle-down"></i><i class="fas fa-fw fa-angle-up"></i></a></${heading}>
 
-<div class="collapse${expanded eq 'true' ? ' show':''}" id="collapse${currentNode.identifier}">
+<a class="accordion-button${expanded?' collapsed':''}" data-bs-toggle="collapse" href="#collapse${currentNode.identifier}" role="button" aria-expanded="${expanded}" aria-controls="collapse${currentNode.identifier}"><${heading}>${currentNode.displayableName}</${heading}></a>
+<div class="collapse${expanded ? ' show':''}" id="collapse${currentNode.identifier}">
+
     ${currentNode.properties.textContent.string}
     <c:forEach items="${jcr:getChildrenOfType(currentNode, 'jmix:droppableContent')}" var="droppableContent">
         <template:module node="${droppableContent}" editable="true"/>
@@ -26,4 +26,6 @@
     <c:if test="${renderContext.editMode}">
         <template:module path="*" nodeTypes="jmix:droppableContent"/>
     </c:if>
+
 </div>
+
