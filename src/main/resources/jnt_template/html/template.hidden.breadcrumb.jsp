@@ -29,7 +29,7 @@
             <c:set var="versionPageHasBeenDisplay" value="false"/>
             <c:forEach items="${functions:reverse(pageNodes)}" var="pageNode" varStatus="status">
                 <c:if test="${status.index > 1}">
-                    <c:if test="${! versionPageHasBeenDisplay}">
+                    <c:if test="${! versionPageHasBeenDisplay || true}">
                         <c:if test="${! jcr:isNodeType(pageNode, 'jacademix:hidePage')}">
                             <%-- now we check if there is sister pages --%>
                             <c:set var="parentPage" value="${jcr:getParentOfType(pageNode, 'jmix:navMenuItem')}"/>
@@ -52,7 +52,7 @@
                                         </ul>
                                     </li>
                                     --%>
-                                    <li class="breadcrumb-item dropdown">
+                                    <li class="breadcrumb-item dropdown ${versionPageHasBeenDisplay?' d-none d-xs-block d-sm-block d-md-block d-lg-none':''}">
                                         <template:addCacheDependency node="${pageNode}"/>
                                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="breadcrumb_${pageNode.identifier}">
                                                 ${pageNode.displayableName}
