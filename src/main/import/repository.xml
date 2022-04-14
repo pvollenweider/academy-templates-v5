@@ -77,6 +77,15 @@
                      </product-topics>
                   </pagecontent>
                </product-home>
+               <kb j:applyOn="jacademy:kbEntry"
+                   j:defaultTemplate="true"
+                   j:hiddenTemplate="false"
+                   jcr:primaryType="jnt:contentTemplate">
+                  <pagecontent jcr:primaryType="jnt:contentList">
+                     <main-resource-display j:mainResourceView="detail" jcr:primaryType="jnt:mainResourceDisplay"/>
+                     <feedback j:level="0" j:limitedAbsoluteAreaEdit="false" jcr:primaryType="jnt:absoluteArea"/>
+                  </pagecontent>
+               </kb>
             </base>
             <base2 j:theme="#/modules/jahia-academy-template/templates/files/themes/default"
                    j:view="jahia-academy-document-template"
