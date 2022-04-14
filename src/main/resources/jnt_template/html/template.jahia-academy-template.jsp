@@ -40,6 +40,8 @@
         </li>
 
         <li class="nav-item">
+            <template:include view="hidden.login"/>
+            <%--
             <div class="dropdown text-end">
                 <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle"
                    id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,6 +57,7 @@
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
             </div>
+            --%>
         </li>
     </ul>
     <div class="bg-white">
