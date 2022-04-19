@@ -90,7 +90,7 @@ printMenu = { startNode, level, maxlevel ->
                             print "</a>";
                             print "<ul class=\"fw-normal pb-1 small\">";
                             print "<li><a href='${menuItemUrl}'>${menuItemTitle}</a></li>";
-                            print "<li class='dropdown-divider'></li>";
+                            //print "<li class='dropdown-divider'></li>";
                             printMenu(menuItem, level + 1, maxlevel);
                             print "</ul>";
                             print "</li>";
