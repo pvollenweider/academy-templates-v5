@@ -61,16 +61,13 @@
         </li>
     </ul>
     <div class="bg-white">
-        <nav class="navbar navbar-light border-bottom sticky-top  p-4" role="navigation">
+        <nav class="navbar navbar-light border-bottom sticky-top" role="navigation">
             <template:include view="hidden.mainnav"/>
         </nav>
     </div>
 </header>
 
 <main>
-
-    <%-- TODO: jacademix:hideBreadcrumb --%>
-
     <template:area path="pagecontent"/>
 </main>
 

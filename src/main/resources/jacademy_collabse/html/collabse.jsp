@@ -14,9 +14,9 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <c:set var="heading" value="${currentNode.properties.heading.string}"/>
-<c:set var="expanded" value="${currentNode.properties.expanded.string}"/>
+<c:set var="expanded" value="${currentNode.properties.expanded.string eq 'true'}"/>
 
-<a class="accordion-button${expanded?' collapsed':''}" data-bs-toggle="collapse" href="#collapse${currentNode.identifier}" role="button" aria-expanded="${expanded}" aria-controls="collapse${currentNode.identifier}"><${heading}>${currentNode.displayableName}</${heading}></a>
+<a class="accordion-button${expanded?' ':' collapsed'}" data-bs-toggle="collapse" href="#collapse${currentNode.identifier}" role="button" aria-expanded="${expanded}" aria-controls="collapse${currentNode.identifier}"><${heading}>${currentNode.displayableName}</${heading}></a>
 <div class="collapse${expanded ? ' show':''}" id="collapse${currentNode.identifier}">
 
     ${currentNode.properties.textContent.string}

@@ -44,23 +44,6 @@
 
         <li class="nav-item">
             <template:include view="hidden.login"/>
-            <%--
-            <div class="dropdown text-end">
-                <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle"
-                   id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                    John Doe
-                </a>
-                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider"/>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-            --%>
         </li>
     </ul>
     <div class="bg-white">
@@ -78,18 +61,13 @@
 <main>
         <div class="container-fluid">
             <div class="row">
-                <template:include view="hidden.sidenav2" var="sidenav"/>
-                <c:if test="${! empty sidenav}">
-                    <div class="d-none d-md-block col-3 col-xxl-2 p-0">
-                       ${sidenav}
-                    </div>
-                </c:if>
-                <%--<div class="col-md-12 col-lg-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">--%>
-                <div class="col-sm-12 col-md-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">
+                <div class="col-md-12 col-lg-12 col-xxl-10">
                     <div class="container-lg ">
                         <div class="row gx-5">
-                            <div class="col-12 col-lg-9 ">
+                            <div class="col-12 col-sm-9 ">
                                 <article class="pb-5 pt-3 bg-white" id="article">
+
+
                                     <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:metadatas')}">
                                         <c:set var="personas" value="${mainResourceNode.properties.personas}"/>
                                         <c:if test="${! empty personas}">
@@ -116,14 +94,16 @@
 
 
                                     <div class="mt-4">
-                                        <template:area path="document-area"/>
+                                        <template:area path="pagecontent"/>
                                     </div>
                                 </article>
                             </div>
-                            <div class="col-3 d-none d-lg-block">
+                            <div class="col-3 d-none d-sm-block">
                                 <nav class="sticky-top toc" id="toc">
                                     <strong class="text-primary">In this page</strong>
                                     <nav id="toc2" data-toggle="#article" data-scope="h2"></nav>
+
+
                                     <ul data-toc-headings="h2, h3" data-toc="#article">
                                     </ul>
                                     <ul>
@@ -136,7 +116,12 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+                <div class="col-2 d-none d-xl-block">
+                    <!--empty-->
+                </div>
+
             </div>
         </div>
 

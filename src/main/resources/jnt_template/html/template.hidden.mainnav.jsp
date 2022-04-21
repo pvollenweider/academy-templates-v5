@@ -85,20 +85,21 @@
                                 <c:choose>
                                     <c:when test="${hasLevel2Pages}">
                                         <c:set var="level2PageMenu">
-                                        <li class="nav-item  ${page1Active? ' active' :''} dropdown">
-                                            <a class="nav-link dropdown-toggle ${page1Active? ' active' :''}" href="#"
-                                               id="navbarDropdownMen-${currentNode.identifier}-${level1Page.identifier}"
-                                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    ${page1Title}
-                                            </a>
-                                            <div class="dropdown-menu"
-                                                 aria-labelledby="navbarDropdownMen-${currentNode.identifier}-${level1Page.identifier}">
-                                                <a class="dropdown-item" href="${page1Url}">${page1Title}</a>
-                                                <div class="dropdown-divider"></div>
+                                            <li class="nav-item  ${page1Active? ' active' :''} dropdown">
+                                                <a class="nav-link dropdown-toggle ${page1Active? ' active' :''}"
+                                                   href="#"
+                                                   id="navbarDropdownMen-${currentNode.identifier}-${level1Page.identifier}"
+                                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        ${page1Title}
+                                                </a>
+                                                <div class="dropdown-menu"
+                                                     aria-labelledby="navbarDropdownMen-${currentNode.identifier}-${level1Page.identifier}">
+                                                    <a class="dropdown-item" href="${page1Url}">${page1Title}</a>
+                                                    <div class="dropdown-divider"></div>
 
-                                                    <c:forEach items="${level2Pages}" var="level2Page" varStatus="status">
+                                                    <c:forEach items="${level2Pages}" var="level2Page"
+                                                               varStatus="status">
                                                         <c:if test="${! jcr:isNodeType(level2Page, 'jacademix:hidePage')}">
-                                                            <c:set var="level2PageCounter" value="${level2PageCounter+1}"/>
 
                                                             <c:set var="displayLevel2Page" value="true"/>
                                                             <c:if test="${jcr:isNodeType(level1Page, 'jacademix:hidePage')}">
@@ -117,6 +118,7 @@
                                                                 </c:forEach>
                                                             </c:if>
                                                             <c:if test="${displayLevel2Page}">
+                                                                <c:set var="level2PageCounter" value="${level2PageCounter+1}"/>
                                                                 <c:choose>
                                                                     <c:when test="${jcr:isNodeType(level2Page, 'jnt:navMenuText')}">
                                                                         <c:set var="page2Url" value="#"/>
@@ -130,7 +132,8 @@
                                                                                value="${level2Page.displayableName}"/>
                                                                     </c:when>
                                                                     <c:when test="${jcr:isNodeType(level2Page, 'jnt:page')}">
-                                                                        <c:url var="page2Url" value="${level2Page.url}"/>
+                                                                        <c:url var="page2Url"
+                                                                               value="${level2Page.url}"/>
                                                                         <c:set var="page2Title"
                                                                                value="${level2Page.displayableName}"/>
                                                                         <c:if test="${fn:contains(renderContext.mainResource.path, level2Page.path)}">
@@ -158,10 +161,8 @@
                                                             <c:remove var="page2Title"/>
                                                         </c:if>
                                                     </c:forEach>
-
-
-                                            </div>
-                                        </li>
+                                                </div>
+                                            </li>
                                         </c:set>
                                         <c:choose>
                                             <c:when test="${level2PageCounter>0}">

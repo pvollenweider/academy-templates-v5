@@ -83,7 +83,9 @@
                    jcr:primaryType="jnt:contentTemplate">
                   <pagecontent jcr:primaryType="jnt:contentList">
                      <main-resource-display j:mainResourceView="detail" jcr:primaryType="jnt:mainResourceDisplay"/>
-                     <feedback j:level="0" j:limitedAbsoluteAreaEdit="false" jcr:primaryType="jnt:absoluteArea"/>
+                     <feedback j:level="0"
+                               j:limitedAbsoluteAreaEdit="false"
+                               jcr:primaryType="jnt:absoluteArea"/>
                   </pagecontent>
                </kb>
             </base>
@@ -102,6 +104,27 @@
                   <main-resource-display j:mainResourceView="default" jcr:primaryType="jnt:mainResourceDisplay"/>
                </pagecontent>
             </content-template>
+            <base3 j:hiddenTemplate="false"
+                   j:view="jahia-academy-fixapplier-template"
+                   jcr:primaryType="jnt:template">
+               <j:translation_en jcr:language="en"
+                                 jcr:mixinTypes="mix:title"
+                                 jcr:primaryType="jnt:translation"
+                                 jcr:title="base3"/>
+               <fixApplier j:applyOn="jnt:fixApplier"
+                           j:defaultTemplate="true"
+                           j:hiddenTemplate="false"
+                           jcr:primaryType="jnt:contentTemplate">
+                  <j:translation_en jcr:language="en"
+                                    jcr:mixinTypes="mix:title"
+                                    jcr:primaryType="jnt:translation"
+                                    jcr:title="fixApplier"/>
+                  <pagecontent jcr:mixinTypes="jmix:systemNameReadonly"
+                               jcr:primaryType="jnt:contentList">
+                     <main-resource-display j:mainResourceView="detail" jcr:primaryType="jnt:mainResourceDisplay"/>
+                  </pagecontent>
+               </fixApplier>
+            </base3>
          </templates>
          <home j:isHomePage="true"
                j:templateName="free"
