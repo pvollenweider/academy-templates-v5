@@ -81,8 +81,10 @@
                                 <c:set var="level2Pages"
                                        value="${jcr:getChildrenOfType(level1Page, 'jmix:navMenuItem')}"/>
                                 <c:set var="hasLevel2Pages" value="${fn:length(level2Pages) > 0}"/>
+                                <c:set var="level2PageCounter" value="0"/>
                                 <c:choose>
                                     <c:when test="${hasLevel2Pages}">
+                                        <c:set var="level2PageMenu">
                                         <li class="nav-item  ${page1Active? ' active' :''} dropdown">
                                             <a class="nav-link dropdown-toggle ${page1Active? ' active' :''}" href="#"
                                                id="navbarDropdownMen-${currentNode.identifier}-${level1Page.identifier}"
@@ -93,69 +95,90 @@
                                                  aria-labelledby="navbarDropdownMen-${currentNode.identifier}-${level1Page.identifier}">
                                                 <a class="dropdown-item" href="${page1Url}">${page1Title}</a>
                                                 <div class="dropdown-divider"></div>
-                                                <c:forEach items="${level2Pages}" var="level2Page" varStatus="status">
-                                                    <c:if test="${! jcr:isNodeType(level2Page, 'jacademix:hidePage')}">
 
-                                                        <c:set var="displayLevel2Page" value="true"/>
-                                                        <c:if test="${jcr:isNodeType(level1Page, 'jacademix:hidePage')}">
-                                                            <c:set var="displayLevel1Page" value="false"/>
-                                                        </c:if>
+                                                    <c:forEach items="${level2Pages}" var="level2Page" varStatus="status">
+                                                        <c:if test="${! jcr:isNodeType(level2Page, 'jacademix:hidePage')}">
+                                                            <c:set var="level2PageCounter" value="${level2PageCounter+1}"/>
 
-                                                        <c:if test="${!empty level2Page.properties['j:displayInMenuName']}">
-                                                            <c:set var="displayLevel2Page" value="false"/>
-                                                            <c:forEach
-                                                                    items="${level2Page.properties['j:displayInMenuName']}"
-                                                                    var="display">
-                                                                <c:if test="${display.string eq currentNode.name}">
-                                                                    <c:set var="displayLevel2Page"
-                                                                           value="${display.string eq currentNode.name}"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:if>
-                                                        <c:if test="${displayLevel2Page}">
-                                                            <c:choose>
-                                                                <c:when test="${jcr:isNodeType(level2Page, 'jnt:navMenuText')}">
-                                                                    <c:set var="page2Url" value="#"/>
-                                                                    <c:set var="page2Title"
-                                                                           value="${level2Page.displayableName}"/>
-                                                                </c:when>
-                                                                <c:when test="${jcr:isNodeType(level2Page, 'jnt:externalLink')}">
-                                                                    <c:url var="page2Url"
-                                                                           value="${level2Page.properties['j:url'].string}"/>
-                                                                    <c:set var="page2Title"
-                                                                           value="${level2Page.displayableName}"/>
-                                                                </c:when>
-                                                                <c:when test="${jcr:isNodeType(level2Page, 'jnt:page')}">
-                                                                    <c:url var="page2Url" value="${level2Page.url}"/>
-                                                                    <c:set var="page2Title"
-                                                                           value="${level2Page.displayableName}"/>
-                                                                    <c:if test="${fn:contains(renderContext.mainResource.path, level2Page.path)}">
-                                                                        <c:set var="page2Active" value="true"/>
+                                                            <c:set var="displayLevel2Page" value="true"/>
+                                                            <c:if test="${jcr:isNodeType(level1Page, 'jacademix:hidePage')}">
+                                                                <c:set var="displayLevel1Page" value="false"/>
+                                                            </c:if>
+
+                                                            <c:if test="${!empty level2Page.properties['j:displayInMenuName']}">
+                                                                <c:set var="displayLevel2Page" value="false"/>
+                                                                <c:forEach
+                                                                        items="${level2Page.properties['j:displayInMenuName']}"
+                                                                        var="display">
+                                                                    <c:if test="${display.string eq currentNode.name}">
+                                                                        <c:set var="displayLevel2Page"
+                                                                               value="${display.string eq currentNode.name}"/>
                                                                     </c:if>
-                                                                </c:when>
-                                                                <c:when test="${jcr:isNodeType(level2Page, 'jnt:nodeLink')}">
-                                                                    <c:url var="page2Url"
-                                                                           value="${level2Page.properties['j:node'].node.url}"/>
-                                                                    <c:set var="page2Title"
-                                                                           value="${level2Page.properties['jcr:title'].string}"/>
-                                                                    <c:if test="${empty page2Title}">
+                                                                </c:forEach>
+                                                            </c:if>
+                                                            <c:if test="${displayLevel2Page}">
+                                                                <c:choose>
+                                                                    <c:when test="${jcr:isNodeType(level2Page, 'jnt:navMenuText')}">
+                                                                        <c:set var="page2Url" value="#"/>
                                                                         <c:set var="page2Title"
-                                                                               value="${level2Page.properties['j:node'].node.displayableName}"/>
-                                                                    </c:if>
-                                                                </c:when>
-                                                            </c:choose>
-                                                            <a class="dropdown-item ${page2Active? ' active' :''}"
-                                                               href="${page2Url}">${page2Title} <c:if
-                                                                    test="${page2Active}"><span
-                                                                    class="visually-hidden">(current)</span></c:if></a>
+                                                                               value="${level2Page.displayableName}"/>
+                                                                    </c:when>
+                                                                    <c:when test="${jcr:isNodeType(level2Page, 'jnt:externalLink')}">
+                                                                        <c:url var="page2Url"
+                                                                               value="${level2Page.properties['j:url'].string}"/>
+                                                                        <c:set var="page2Title"
+                                                                               value="${level2Page.displayableName}"/>
+                                                                    </c:when>
+                                                                    <c:when test="${jcr:isNodeType(level2Page, 'jnt:page')}">
+                                                                        <c:url var="page2Url" value="${level2Page.url}"/>
+                                                                        <c:set var="page2Title"
+                                                                               value="${level2Page.displayableName}"/>
+                                                                        <c:if test="${fn:contains(renderContext.mainResource.path, level2Page.path)}">
+                                                                            <c:set var="page2Active" value="true"/>
+                                                                        </c:if>
+                                                                    </c:when>
+                                                                    <c:when test="${jcr:isNodeType(level2Page, 'jnt:nodeLink')}">
+                                                                        <c:url var="page2Url"
+                                                                               value="${level2Page.properties['j:node'].node.url}"/>
+                                                                        <c:set var="page2Title"
+                                                                               value="${level2Page.properties['jcr:title'].string}"/>
+                                                                        <c:if test="${empty page2Title}">
+                                                                            <c:set var="page2Title"
+                                                                                   value="${level2Page.properties['j:node'].node.displayableName}"/>
+                                                                        </c:if>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <a class="dropdown-item ${page2Active? ' active' :''}"
+                                                                   href="${page2Url}">${page2Title} <c:if
+                                                                        test="${page2Active}"><span
+                                                                        class="visually-hidden">(current)</span></c:if></a>
+                                                            </c:if>
+                                                            <c:remove var="page2Active"/>
+                                                            <c:remove var="page2Url"/>
+                                                            <c:remove var="page2Title"/>
                                                         </c:if>
-                                                        <c:remove var="page2Active"/>
-                                                        <c:remove var="page2Url"/>
-                                                        <c:remove var="page2Title"/>
-                                                    </c:if>
-                                                </c:forEach>
+                                                    </c:forEach>
+
+
                                             </div>
                                         </li>
+                                        </c:set>
+                                        <c:choose>
+                                            <c:when test="${level2PageCounter>0}">
+                                                ${level2PageMenu}
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li class="nav-item ${page1Active? ' active' :''}">
+                                                    <a class="nav-link" href="${page1Url}">${page1Title} <c:if
+                                                            test="${page1Active}"><span
+                                                            class="visually-hidden">(current)</span></c:if></a>
+                                                </li>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <c:remove var="level2PageCounter"/>
+                                        <c:remove var="level2PageMenu"/>
+
                                     </c:when>
                                     <c:otherwise>
                                         <li class="nav-item ${page1Active? ' active' :''}">
