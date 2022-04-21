@@ -61,10 +61,17 @@
 <main>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 col-lg-12 col-xxl-10">
+                <template:include view="hidden.sidenav2" var="sidenav"/>
+                <c:if test="${! empty sidenav}">
+                    <div class="d-none d-md-block col-3 col-xxl-2 p-0">
+                       ${sidenav}
+                    </div>
+                </c:if>
+                <%--<div class="col-md-12 col-lg-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">--%>
+                <div class="col-sm-12 col-md-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">
                     <div class="container-lg ">
                         <div class="row gx-5">
-                            <div class="col-12 col-sm-9 ">
+                            <div class="col-12 col-lg-9 ">
                                 <article class="pb-5 pt-3 bg-white" id="article">
 
 
@@ -98,7 +105,7 @@
                                     </div>
                                 </article>
                             </div>
-                            <div class="col-3 d-none d-sm-block">
+                            <div class="col-3 d-none d-lg-block">
                                 <nav class="sticky-top toc" id="toc">
                                     <strong class="text-primary">In this page</strong>
                                     <nav id="toc2" data-toggle="#article" data-scope="h2"></nav>
@@ -116,10 +123,6 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="col-2 d-none d-xl-block">
-                    <!--empty-->
                 </div>
 
             </div>

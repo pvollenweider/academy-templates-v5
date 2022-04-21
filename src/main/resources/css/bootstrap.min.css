@@ -11475,17 +11475,17 @@ article ol > li:before {
   padding: 3px 8px;
   font-weight: bold;
 }
-article ul {
+article ul:not(.fa-ul) {
   list-style: none;
   margin-bottom: 30px;
   padding: 0;
 }
-article ul li {
+article ul:not(.fa-ul) li {
   margin: 0 0 5px 15px;
-  text-indent: -26px;
+  text-indent: -8px;
 }
-article ul li:before {
-  background: url("data:image/svg+xml,<svg width='12' height='12' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M8.58997 16.59L13.17 12L8.58997 7.41L9.99997 6L16 12L9.99997 18L8.58997 16.59Z' fill='black'/></svg>");
+article ul:not(.fa-ul) li:before {
+  background: url("data:image/svg+xml,<svg width='12' height='12' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M8.58997 16.59L13.17 12L8.58997 7.41L9.99997 6L16 12L9.99997 18L8.58997 16.59Z' fill='black'/></svg>") 8px;
   content: "";
   display: inline-block;
   height: 10px;
