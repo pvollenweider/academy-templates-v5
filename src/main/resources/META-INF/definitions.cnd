@@ -68,19 +68,10 @@
 
 [jacademy:textContent] > jnt:content, jacademix:textContent, jacademix:content, jacademix:component
 
-[jacademy:video] > jnt:content, jacademix:embedVideo, jacademix:content, jacademix:component
-
 [jacademix:isVersionPage] mixin
  extends = jmix:navMenuItem
  itemtype = content
  - version (string) = '7.2' mandatory
-
-[jacademix:isMultiplePageDoc] mixin
- extends = jmix:navMenuItem
- itemtype = content
- - isMultiplePageDoc (string) = 'This doc is a multiple page doc' protected
-
-[jacademy:checkCurrentVersion] > jnt:content, jacademix:component, jmix:studioOnly
 
 [jacademy:embedVideo] > jnt:content, jacademix:document, jacademix:embedVideo
 
@@ -132,11 +123,6 @@
  itemtype = content
  - hideBreadcrumb (string) = 'Hide the breadcrumb on this page.' protected
 
-[jacademix:hideNavbuttons] mixin
- extends = jmix:navMenuItem
- itemtype = content
- - hideNavbuttons (string) = 'Hide the navigation buttons (only for documentation template).' protected
-
 [jacademix:whatsNew] mixin
 - releaseDate (date) mandatory
 
@@ -153,15 +139,6 @@
  - releaseNotes (weakreference, picker[type='editoriallink']) < 'jmix:droppableContent', 'jnt:page'
  - store (string) = 'https://'
  + * (jmix:droppableContent)
-
-[jacademy:popup] > jnt:content, jacademix:component, mix:title
- - closeText (string) = 'Close' internationalized
- - delay (long) = '3000' mandatory indexed=no
- - expires (long) = '365' indexed=no
- - size (string, choicelist[resourceBundle]) = 'default' autocreated indexed=no < 'default', 'lg', 'sm'
- - displayOnlyOnce (boolean) = 'true'
- + * (jmix:droppableContent) = jmix:droppableContent
-
 
 [jacademy:textBox] > jnt:content, jacademix:component, mix:title, bootstrap5mix:text
 - hx (string, choicelist[resourceBundle,moduleImage='png']) = 'h2' autocreated indexed=no < 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
