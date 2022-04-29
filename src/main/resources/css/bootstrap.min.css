@@ -11491,6 +11491,7 @@ article ul:not(.fa-ul) li:before {
   height: 10px;
   margin-right: 10px;
   width: 5px;
+  background-repeat: no-repeat;
 }
 
 /*# sourceMappingURL=style-academy.css.map */

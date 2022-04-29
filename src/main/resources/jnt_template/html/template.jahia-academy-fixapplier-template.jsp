@@ -25,7 +25,6 @@
     <!-- Bootstrap CSS -->
     <template:addResources type="css" resources="bootstrap.min.css"/>
     <template:addResources type="css" resources="all.min.css"/>
-    <template:addResources type="css" resources="multilevel.css"/>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
@@ -53,11 +52,6 @@
     </div>
 </header>
 
-<%-- TODO: jacademix:hideBreadcrumb --%>
-<c:if test="${!jcr:isNodeType(mainResourceNode, 'jacademix:hideBreadcrumb')}">
-    <template:include view="hidden.breadcrumb"/>
-</c:if>
-
 <main>
         <div class="container-fluid">
             <div class="row">
@@ -67,14 +61,11 @@
                        ${sidenav}
                     </div>
                 </c:if>
-                <%--<div class="col-md-12 col-lg-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">--%>
                 <div class="col-sm-12 col-md-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">
                     <div class="container-lg ">
                         <div class="row gx-5">
                             <div class="col-12 col-lg-9 ">
                                 <article class="pb-5 pt-3 bg-white" id="article">
-
-
                                     <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:metadatas')}">
                                         <c:set var="personas" value="${mainResourceNode.properties.personas}"/>
                                         <c:if test="${! empty personas}">
@@ -109,8 +100,6 @@
                                 <nav class="sticky-top toc" id="toc">
                                     <strong class="text-primary">In this page</strong>
                                     <nav id="toc2" data-toggle="#article" data-scope="h2"></nav>
-
-
                                     <ul data-toc-headings="h2, h3" data-toc="#article">
                                     </ul>
                                     <ul>
@@ -124,7 +113,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -140,14 +128,10 @@
 <template:addResources type="javascript" resources="toc.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="index.bundle.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="readingTime.js" targetTag="${renderContext.editMode?'head':'body'}"/>
-<template:addResources type="javascript" resources="multilevel-nav.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 
 <template:addResources type="inline" targetTag="body">
     <script>
         $('article').readingTime();
-
-
-
     </script>
 </template:addResources>
 

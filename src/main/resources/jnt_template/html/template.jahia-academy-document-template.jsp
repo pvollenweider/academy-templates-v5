@@ -39,28 +39,11 @@
 <header class="border-bottom border-gray" id="top">
     <ul class="jac-topbar nav justify-content-end bg-light align-items-center px-4">
         <li class="nav-item">
-            <a class="nav-link" href="#">jahia.com</a>
+            <a class="nav-link" href="https://www.jahia.com">jahia.com</a>
         </li>
 
         <li class="nav-item">
             <template:include view="hidden.login"/>
-            <%--
-            <div class="dropdown text-end">
-                <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle"
-                   id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                    John Doe
-                </a>
-                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider"/>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-            --%>
         </li>
     </ul>
     <div class="bg-white">
@@ -69,11 +52,6 @@
         </nav>
     </div>
 </header>
-
-<%-- TODO: jacademix:hideBreadcrumb --%>
-<c:if test="${!jcr:isNodeType(mainResourceNode, 'jacademix:hideBreadcrumb')}">
-    <template:include view="hidden.breadcrumb"/>
-</c:if>
 
 <main>
         <div class="container-fluid">
@@ -84,22 +62,15 @@
                        ${sidenav}
                     </div>
                 </c:if>
-                <%--<div class="col-md-12 col-lg-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">--%>
                 <div class="col-sm-12 col-md-${empty sidenav ? '12' : '9'} col-xxl-${empty sidenav ? '10' : '8'} ">
                     <div class="container-lg ">
                         <div class="row gx-5">
                             <div class="col-12 col-lg-9 ">
-                                <article class="pb-5 pt-3 bg-white" id="article">
-                                    <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:metadatas')}">
-                                        <c:set var="personas" value="${mainResourceNode.properties.personas}"/>
-                                        <c:if test="${! empty personas}">
-                                            <c:forEach items="${personas}" var="persona" varStatus="status">
-                                                <c:set var="personaNode" value="${persona.node}"/>
-                                                <span class="badge bg-success">${personaNode.displayableName}</span>
-                                            </c:forEach>
-                                        </c:if>
-                                    </c:if>
-                                    <h1>${mainResourceNode.displayableName}</h1>
+                                <c:if test="${!jcr:isNodeType(mainResourceNode, 'jacademix:hideBreadcrumb')}">
+                                    <template:include view="hidden.breadcrumb"/>
+                                </c:if>
+                                <article class="pb-5" id="article">
+                                    <h1 class="py-0">${mainResourceNode.displayableName}</h1>
                                     <c:set var="lastPublishedDate" value="${mainResourceNode.properties['j:lastPublished'].time}"/>
                                     <c:if test="${! empty lastPublishedDate}">
                                         <c:choose>
@@ -110,17 +81,23 @@
                                                 <fmt:formatDate value="${lastPublishedDate}" pattern="MMMM d, yyyy" var="formatedReleaseDate"/>
                                             </c:otherwise>
                                         </c:choose>
-                                        <div class="text-secondary small">${formatedReleaseDate} - <span class="eta"></span> read</div>
+                                        <span class="text-secondary small">${formatedReleaseDate} - <span class="eta"></span> read</span>
                                     </c:if>
-
-
-
+                                    <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:metadatas')}">
+                                        <c:set var="personas" value="${mainResourceNode.properties.personas}"/>
+                                        <c:if test="${! empty personas}">
+                                            <c:forEach items="${personas}" var="persona" varStatus="status">
+                                                <c:set var="personaNode" value="${persona.node}"/>
+                                                <span class="badge bg-success">${personaNode.displayableName}</span>
+                                            </c:forEach>
+                                        </c:if>
+                                    </c:if>
                                     <div class="mt-4">
                                         <template:area path="document-area"/>
                                     </div>
                                 </article>
                             </div>
-                            <div class="col-3 d-none d-lg-block">
+                            <div class="col-3 d-none d-lg-block py-3">
                                 <nav class="sticky-top toc" id="toc">
                                     <strong class="text-primary">In this page</strong>
                                     <nav id="toc2" data-toggle="#article" data-scope="h2"></nav>
@@ -152,21 +129,32 @@
 <template:addResources type="javascript" resources="toc.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="index.bundle.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="readingTime.js" targetTag="${renderContext.editMode?'head':'body'}"/>
-<template:addResources type="javascript" resources="multilevel-nav.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 
-<template:addResources type="inline" targetTag="body">
+<c:set var="pageId" value="#page-${mainResourceNode.identifier}"/>
+<template:addResources type="inline" targetTag="${renderContext.editMode?'head':'body'}">
     <script>
         $('article').readingTime();
 
+        $.fn.isInViewport = function() {
+            var elementTop = $(this).offset().top;
+            var elementBottom = elementTop + $(this).outerHeight();
+            var viewportTop = $(window).scrollTop();
+            var viewportBottom = viewportTop + $(window).height();
+            return elementBottom > viewportTop && elementTop < viewportBottom;
+        };
 
-
+        if (! $("${pageId}").isInViewport()) {
+            console.log("Scroll down to see you section in the side menu");
+        }
     </script>
 </template:addResources>
+
+<c:if test="${renderContext.previewMode}">
 
 <div style="
     position: fixed;
     top: 90%;
-    left: 50%;
+    right: 100px;
     z-index: 10000;
     transform: translate(-50%, -50%);
     background: rgba(247, 201, 241, 0.4);
@@ -180,6 +168,7 @@
     <div class="d-none d-xl-block d-xxl-none">X-Large (xl)</div>
     <div class="d-none d-xxl-block">XX-Large (xxl)</div>
 </div>
+</c:if>
 </body>
 
 </html>

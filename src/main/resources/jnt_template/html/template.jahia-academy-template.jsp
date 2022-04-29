@@ -13,6 +13,7 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <c:set var="language" value="${renderContext.mainResourceLocale.language}"/>
+<c:set var="mainResourceNode" value="${renderContext.mainResource.node}"/>
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -30,7 +31,7 @@
     TODO: jacademix:alternateTitle
     --%>
 
-    <title>${fn:escapeXml(renderContext.mainResource.node.displayableName)}</title>
+    <title>${fn:escapeXml(mainResourceNode.displayableName)}</title>
 </head>
 <body class="d-flex flex-column h-100 " data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="180" tabindex="0">
 <header class="border-bottom border-gray" id="top">
@@ -41,23 +42,6 @@
 
         <li class="nav-item">
             <template:include view="hidden.login"/>
-            <%--
-            <div class="dropdown text-end">
-                <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle"
-                   id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                    John Doe
-                </a>
-                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider"/>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-            --%>
         </li>
     </ul>
     <div class="bg-white">

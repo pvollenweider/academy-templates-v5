@@ -28,6 +28,7 @@ printMenu = { startNode, level, maxlevel ->
 
                     boolean hasChildren = level < maxlevel && JCRTagUtils.hasChildrenOfType(menuItem, "jmix:navMenuItem")
                     String menuItemUrl = null;
+                    String menuItemId = "page-" + menuItem.getIdentifier();
                     String menuItemTitle = menuItem.displayableName;
                     boolean isActive = renderContext.mainResource.node.path.indexOf(menuItem.path) > -1;
                     boolean isCurrent = renderContext.mainResource.node.path.equals(menuItem.path);
@@ -58,7 +59,7 @@ printMenu = { startNode, level, maxlevel ->
                     if (hasChildren && level < maxlevel) {
                         if (level == 1) {
                             print "<li>";
-                            print "<a class='d-inline-flex align-items-center rounded collapsed' href='${menuItemUrl}'>${menuItemTitle}"
+                            print "<a class='d-inline-flex align-items-center rounded collapsed' href='${menuItemUrl}' id='${menuItemId}'>${menuItemTitle}"
                             if (isCurrent) {
                                 print " <span class='visually-hidden'>(current)</span>";
                             }
@@ -83,13 +84,13 @@ printMenu = { startNode, level, maxlevel ->
                             print "</li>";
                         } else {
                             print "<li>";
-                            print "<a href='${menuItemUrl}'>${menuItemTitle}"
+                            print "<a href='${menuItemUrl}' id='${menuItemId}'>${menuItemTitle}"
                             if (isCurrent) {
                                 print " <span class='visually-hidden'>(current)</span>";
                             }
                             print "</a>";
                             print "<ul class=\"fw-normal pb-1 small\">";
-                            print "<li><a href='${menuItemUrl}'>${menuItemTitle}</a></li>";
+                            print "<li><a href='${menuItemUrl}' id='${menuItemId}'>${menuItemTitle}</a></li>";
                             //print "<li class='dropdown-divider'></li>";
                             printMenu(menuItem, level + 1, maxlevel);
                             print "</ul>";
@@ -98,7 +99,7 @@ printMenu = { startNode, level, maxlevel ->
                     } else {
                         if (level == 1) {
                             print "<li>";
-                            print "<a class=\"d-inline-flex align-items-center rounded ${isCurrent ? ' active' : ''}\" href=\"${menuItemUrl}\">${menuItemTitle}";
+                            print "<a class=\"d-inline-flex align-items-center rounded ${isCurrent ? ' active' : ''}\" href=\"${menuItemUrl}\" id='${menuItemId}'>${menuItemTitle}";
                             if (isCurrent) {
                                 print " <span class=\"visually-hidden\">(current)</span>";
                             }
@@ -106,7 +107,7 @@ printMenu = { startNode, level, maxlevel ->
                             print "</li>";
                         } else if (level == 2) {
                                 print "<li>";
-                                print "<a class=\"d-inline-flex align-items-center rounded ${isCurrent?' active':''}\" href=\"${menuItemUrl}\">${menuItemTitle}";
+                                print "<a class=\"d-inline-flex align-items-center rounded ${isCurrent?' active':''}\" href=\"${menuItemUrl}\" id='${menuItemId}'>${menuItemTitle}";
                                 if (isCurrent) {
                                     print " <span class=\"visually-hidden\">(current)</span>";
                                 }
@@ -114,7 +115,7 @@ printMenu = { startNode, level, maxlevel ->
                                 print "</li>";
                         } else {
                             print "<li>";
-                            print "<a class=\"d-inline-flex align-items-center rounded ${isCurrent ? ' active' : ''}\" href=\"${menuItemUrl}\">${menuItemTitle}";
+                            print "<a class=\"d-inline-flex align-items-center rounded ${isCurrent ? ' active' : ''}\" href=\"${menuItemUrl}\" id='${menuItemId}'>${menuItemTitle}";
                             if (isCurrent) {
                                 print " <span class=\"visually-hidden\">(current)</span>";
                             }
