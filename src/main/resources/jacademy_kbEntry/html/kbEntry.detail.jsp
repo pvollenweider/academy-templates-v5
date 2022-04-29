@@ -78,14 +78,17 @@
                 <jcr:node var="relatedLinksNode" path="${currentNode.path}/relatedlinks"/>
 
                 <c:if test="${! empty relatedLinksNode || renderContext.editMode}">
-                    <div class="alert alert-version">
-                        <h4>Related links</h4>
-                        <c:if test="${!renderContext.editMode}">
-                        <ul class="fa-ul"></c:if>
-                            <template:area path="relatedlinks" nodeTypes="jacademy:relatedLink" areaAsSubNode="true"/>
-                            <c:if test="${!renderContext.editMode}"></ul>
-                        </c:if>
-                    </div>
+                    <template:area path="relatedlinks" nodeTypes="jacademy:relatedLink" areaAsSubNode="true" var="relatedlinks"/>
+                    <c:if test="${! empty relatedlinks}">
+                        <div class="alert alert-version">
+                            <h4>Related links</h4>
+                            <c:if test="${!renderContext.editMode}">
+                            <ul class="fa-ul list-unstyled"></c:if>
+                                ${relatedlinks}
+                                <c:if test="${!renderContext.editMode}"></ul>
+                            </c:if>
+                        </div>
+                    </c:if>
                 </c:if>
 
 
