@@ -32,8 +32,13 @@
     <%--
     TODO: jacademix:alternateTitle
     --%>
-
-    <title>${fn:escapeXml(mainResourceNode.displayableName)}</title>
+    <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:alternateTitle')}">
+        <c:set var="pageTitle" value="${mainResourceNode.properties.alternateTitle}"/>
+    </c:if>
+    <c:if test="${empty pageTitle}">
+        <c:set var="pageTitle" value="${mainResourceNode.displayableName}"/>
+    </c:if>
+    <title>${fn:escapeXml(pageTitle)}</title>
 </head>
 <body class="d-flex flex-column h-100 " data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="180" tabindex="0">
 <header class="border-bottom border-gray" id="top">
@@ -70,9 +75,14 @@
                                     <template:include view="hidden.breadcrumb"/>
                                 </c:if>
                                 <article class="pb-5" id="article">
-                                    <h1 class="py-0">${mainResourceNode.displayableName}</h1>
+                                    <h1 class="py-0">${pageTitle}</h1>
                                     <c:set var="lastPublishedDate" value="${mainResourceNode.properties['j:lastPublished'].time}"/>
                                     <c:if test="${! empty lastPublishedDate}">
+                                        <fmt:formatDate value="${lastPublishedDate}" pattern="MMyy" var="testDate"/>
+                                        <c:if test="${testDate eq '0422'}">
+                                            <c:set var="lastPublishedDate" value="${mainResourceNode.properties['jcr:created'].time}"/>
+                                        </c:if>
+
                                         <c:choose>
                                             <c:when test="${language eq 'fr'}">
                                                 <fmt:formatDate value="${lastPublishedDate}" pattern="d MMMM yyyy" var="formatedReleaseDate"/>
@@ -81,7 +91,7 @@
                                                 <fmt:formatDate value="${lastPublishedDate}" pattern="MMMM d, yyyy" var="formatedReleaseDate"/>
                                             </c:otherwise>
                                         </c:choose>
-                                        <span class="text-secondary small">${formatedReleaseDate} - <span class="eta"></span> read</span>
+                                        <span class="text-secondary small"><span id="publishedDate"></span> <span class="sr-only">${formatedReleaseDate}</span></span>
                                     </c:if>
                                     <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:metadatas')}">
                                         <c:set var="personas" value="${mainResourceNode.properties.personas}"/>
@@ -128,13 +138,11 @@
 <template:addResources type="javascript" resources="jquery.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="toc.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="index.bundle.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
-<template:addResources type="javascript" resources="readingTime.js" targetTag="${renderContext.editMode?'head':'body'}"/>
+<template:addResources type="javascript" resources="moment.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 
 <c:set var="pageId" value="#page-${mainResourceNode.identifier}"/>
 <template:addResources type="inline" targetTag="${renderContext.editMode?'head':'body'}">
     <script>
-        $('article').readingTime();
-
         $.fn.isInViewport = function() {
             var elementTop = $(this).offset().top;
             var elementBottom = elementTop + $(this).outerHeight();
@@ -146,6 +154,16 @@
         if (! $("${pageId}").isInViewport()) {
             console.log("Scroll down to see you section in the side menu");
         }
+        <c:set var="lastPublishedDate" value="${mainResourceNode.properties['j:lastPublished'].time}"/>
+        <c:if test="${empty lastPublishedDate}">
+            <c:set var="lastPublishedDate" value="${mainResourceNode.properties['jcr:created'].time}"/>
+        </c:if>
+        <fmt:formatDate value="${lastPublishedDate}" pattern="MMyy" var="testDate"/>
+        <c:if test="${testDate eq '0422'}">
+            <c:set var="lastPublishedDate" value="${mainResourceNode.properties['jcr:created'].time}"/>
+            <fmt:formatDate value="${lastPublishedDate}" pattern="MMyy" var="testDate"/>
+        </c:if>
+        $("#publishedDate").text(moment("${testDate}", "MMYY").fromNow());
     </script>
 </template:addResources>
 

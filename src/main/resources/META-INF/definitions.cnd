@@ -43,9 +43,9 @@
  - targetVersion (string, choicelist[versionsInitializer]) indexed=no
  - comment (string) indexed=no
 
-[jacademix:document] > jmix:droppableContent, mix:title, jmix:editorialContent mixin
+[jacademix:document] > mix:title, jacademix:component mixin
  - audiences (weakreference, choicelist[nodes='/sites/systemsite/categories/audiences;jnt:category',sort]) multiple facetable
- - icon (weakreference, picker[type='image']) internationalized < 'jmix:image'
+ - icon (weakreference, picker[type='image']) internationalized hidden < 'jmix:image'
  - author (string) = 'The Jahia Team'
 
 [jacademix:embedVideo] mixin
@@ -106,7 +106,6 @@
  + relatedlinks (jmix:droppableContent) = jmix:droppableContent
 
 [jacademy:relatedLink] > jnt:content, jmix:droppableContent, jacademix:link
-
 
 [jacademy:listSubPages] > jnt:content, jacademix:component
  - parentPage (weakreference) < 'jmix:droppableContent', 'jmix:navMenuItem', 'jnt:navMenuText', 'jnt:page'
