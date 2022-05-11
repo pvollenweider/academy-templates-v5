@@ -81,7 +81,7 @@
                                             </c:forEach>
                                         </c:if>
                                     </c:if>
-                                    <h1>${mainResourceNode.displayableName}</h1>
+                                    <h1>${pageTitle}</h1>
                                     <c:set var="lastPublishedDate" value="${mainResourceNode.properties['j:lastPublished'].time}"/>
                                     <c:if test="${! empty lastPublishedDate}">
                                         <c:choose>
