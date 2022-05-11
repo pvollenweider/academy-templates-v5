@@ -24,20 +24,26 @@
     <!-- Bootstrap CSS -->
     <template:addResources type="css" resources="bootstrap.min.css"/>
     <template:addResources type="css" resources="all.min.css"/>
+    <template:addResources type="css" resources="multilevel.css"/>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     <%--
     TODO: jacademix:alternateTitle
     --%>
-
-    <title>${fn:escapeXml(mainResourceNode.displayableName)}</title>
+    <c:if test="${jcr:isNodeType(mainResourceNode, 'jacademix:alternateTitle')}">
+        <c:set var="pageTitle" value="${mainResourceNode.properties.alternateTitle}"/>
+    </c:if>
+    <c:if test="${empty pageTitle}">
+        <c:set var="pageTitle" value="${mainResourceNode.displayableName}"/>
+    </c:if>
+    <title>${fn:escapeXml(pageTitle)}</title>
 </head>
 <body class="d-flex flex-column h-100 " data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="180" tabindex="0">
 <header class="border-bottom border-gray" id="top">
     <ul class="jac-topbar nav justify-content-end bg-light align-items-center px-4">
         <li class="nav-item">
-            <a class="nav-link" href="#">jahia.com</a>
+            <a class="nav-link" href="https://www.jahia.com">jahia.com</a>
         </li>
 
         <li class="nav-item">
@@ -64,11 +70,12 @@
 <template:addResources type="javascript" resources="toc.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 <template:addResources type="javascript" resources="index.bundle.min.js" targetTag="${renderContext.editMode?'head':'body'}"/>
 
+<c:if test="${renderContext.previewMode}">
 
 <div style="
     position: fixed;
     top: 90%;
-    left: 50%;
+    right: 100px;
     z-index: 10000;
     transform: translate(-50%, -50%);
     background: rgba(247, 201, 241, 0.4);
@@ -82,6 +89,7 @@
     <div class="d-none d-xl-block d-xxl-none">X-Large (xl)</div>
     <div class="d-none d-xxl-block">XX-Large (xxl)</div>
 </div>
+</c:if>
 </body>
 
 </html>
