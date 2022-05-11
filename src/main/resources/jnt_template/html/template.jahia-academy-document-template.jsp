@@ -41,23 +41,7 @@
     <title>${fn:escapeXml(pageTitle)}</title>
 </head>
 <body class="d-flex flex-column h-100 " data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="180" tabindex="0">
-<header class="border-bottom border-gray" id="top">
-    <ul class="jac-topbar nav justify-content-end bg-light align-items-center px-4">
-        <li class="nav-item">
-            <a class="nav-link" href="https://www.jahia.com">jahia.com</a>
-        </li>
-
-        <li class="nav-item">
-            <template:include view="hidden.login"/>
-        </li>
-    </ul>
-    <div class="bg-white">
-        <nav class="navbar navbar-light border-bottom sticky-top" role="navigation">
-            <template:include view="hidden.mainnav"/>
-        </nav>
-    </div>
-</header>
-
+<template:include view="hidden.main-menu"/>
 <main>
         <div class="container-fluid">
             <div class="row">
